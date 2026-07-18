@@ -1,0 +1,27 @@
+<h1>Flights#Index</h1>
+
+<% if @flights.present? %>
+  <%= form_with url: "/bookings/new", method: :get do |f| %>
+    <%= f.hidden_field :passangers, value: params[:passangers] %>
+    <%= f.collection_radio_buttons :flight_id, @flights, :id, :flight_number %>
+    <br>
+    <%= f.submit "Submit" %>
+  <% end %>
+<% elsif @flights.nil?%>
+  <h2>Choose your flight</h2>
+<% elsif @flights.empty?%>
+  <h2>Flight not available</h2>
+<% end %>
+
+<%= form_with url: "/flights", method: :get do |f| %>
+  <%= f.label :departure_airport_id, 'Departure Airport:' %>
+  <%= f.select(:departure_airport_id, @departure_airports) %><br>
+  <%= f.label :arrival_airport_id, 'Arrival Airport:' %>
+  <%= f.select(:arrival_airport_id, @arrival_airports) %><br>
+  <%= f.label :passangers, 'Passangers:' %>
+  <%= f.select(:passangers, @passangers) %><br>
+  <%= f.label :start_datetime, 'Departure Date:' %>
+  <%= f.select(:start_datetime, @flight_datetimes) %><br>
+  <%= f.submit "Submit" %>
+<% end %>
+<%= link_to "Cancel", flights_path %>
