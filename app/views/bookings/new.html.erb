@@ -1,0 +1,19 @@
+<h1>Bookings#New</h1>
+
+<p>Flight number: <%= @flight_number %></p>
+<p>Number of passengers: <%= @passengers_number %></p>
+
+<%= form_with model: @booking do |f| %>
+  <%= f.hidden_field :flight_id, value: params[:flight_id] %>
+  <%= f.hidden_field :passengers, value: params[:passengers] %>
+
+  <%= f.fields_for :passengers do |sub_form| %>
+  <h3>Passenger #<%= sub_form.index + 1 %></h3>
+    <%= sub_form.label :name, "Name:" %><br>
+    <%= sub_form.text_field :name %><br>
+    <%= sub_form.label :email, "Email:" %><br>
+    <%= sub_form.email_field :email %><br>
+  <% end %>
+
+  <%= f.submit "Submit" %>
+<% end %>
