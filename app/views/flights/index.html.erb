@@ -2,8 +2,8 @@
 
 <% if @flights.present? %>
   <%= form_with url: "/bookings/new", method: :get do |f| %>
-    <%= f.hidden_field :passangers, value: params[:passangers] %>
-    <%= f.collection_radio_buttons :flight_id, @flights, :id, :flight_number %>
+    <%= f.hidden_field :passengers, value: params[:passengers] %>
+    <%= f.collection_radio_buttons :flight_id, @flights, :id, :flight_number, { include_hidden: false } %>
     <br>
     <%= f.submit "Submit" %>
   <% end %>
@@ -18,8 +18,8 @@
   <%= f.select(:departure_airport_id, @departure_airports) %><br>
   <%= f.label :arrival_airport_id, 'Arrival Airport:' %>
   <%= f.select(:arrival_airport_id, @arrival_airports) %><br>
-  <%= f.label :passangers, 'Passangers:' %>
-  <%= f.select(:passangers, @passangers) %><br>
+  <%= f.label :passengers, 'Passengers:' %>
+  <%= f.select(:passengers, @passengers) %><br>
   <%= f.label :start_datetime, 'Departure Date:' %>
   <%= f.select(:start_datetime, @flight_datetimes) %><br>
   <%= f.submit "Submit" %>
