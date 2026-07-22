@@ -1,0 +1,9 @@
+<h1>Your booking:</h1>
+<h2>Flight: <%= @flight.flight_number %></h2>
+
+<h3>Passengers:</h3>
+<ul>
+  <% @passengers.each do |u| %>
+    <li><%= u.name %></li>
+  <% end %>
+</ul>
