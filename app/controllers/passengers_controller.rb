@@ -3,15 +3,16 @@ class PassengersController < ApplicationController
     @booking = Booking.find(passenger_params[:booking_id])
     @passenger = @booking.passengers.build(passenger_params)
 
-    if @passenger.save
-      redirect_to @booking
-    else
-      render :new, status: :unprocessable_entity
-    end
+    respond_to do |format|
+     if @passenger.save
+       format.turbo_stream
+     else
+       format.html { render :new, status: :unprocessable_entity }
+     end
+   end
   end
 
   private
-
 
   def passenger_params
     params.expect(passenger: [ :booking_id, :name, :email ])
