@@ -2,10 +2,8 @@
 <h2>Flight: <%= @flight.flight_number %></h2>
 
 <h3>Passengers:</h3>
-<ul>
-  <% @passengers.each do |u| %>
-    <li><%= u.name %></li>
-  <% end %>
+<ul id="passengers">
+  <%= render @passengers %>
 </ul>
 
 <div data-controller="template" >
@@ -16,14 +14,16 @@
   </div>
 
   <template id="passenger-form">
-    <%= form_with model: @passenger , url: '/passengers' do |f| %>
-      <%= f.hidden_field :booking_id, value: @booking[:id] %>
-      <h3>New Passenger:</h3>
-      <%= f.label :name, "Name:" %><br>
-      <%= f.text_field :name %><br>
-      <%= f.label :email, "Email:" %><br>
-      <%= f.email_field :email %><br>
+    <%= turbo_frame_tag "new_post" do %>
+      <%= form_with model: @passenger , url: '/passengers' do |f| %>
+        <%= f.hidden_field :booking_id, value: @booking[:id] %>
+        <h3>New Passenger:</h3>
+        <%= f.label :name, "Name:" %><br>
+        <%= f.text_field :name %><br>
+        <%= f.label :email, "Email:" %><br>
+        <%= f.email_field :email %><br>
 
-      <%= f.submit "Submit" %>
+        <%= f.submit "Submit" %>
+      <% end %>
     <% end %>
   </template>
