@@ -27,6 +27,8 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @flight = Flight.joins(:bookings).where(bookings: { id: params[:id] }).first
     @passengers = @booking.passengers
+
+    @passenger = Passenger.new
   end
 
   private
