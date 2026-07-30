@@ -17,7 +17,8 @@
 
 <template id="passenger-form">
   <%= turbo_frame_tag "new_post" do %>
-    <%= form_with model: @passenger , url: '/passengers' do |f| %>
+    <%= form_with model: @passenger , url: '/passengers', 
+        data: { controller: "form", action: "turbo:submit-end->form#reset" } do |f| %>
       <%= f.hidden_field :booking_id, value: @booking[:id] %>
       <h3>New Passenger:</h3>
       <%= f.label :name, "Name:" %><br>
